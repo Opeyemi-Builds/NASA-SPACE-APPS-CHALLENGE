@@ -13,17 +13,24 @@ interface Props {
   height?: number;
 }
 
-/** 14-day trend with the astronaut's own normal band shaded. */
+/** 14-day trend with the astronaut's own normal band. BP plots systolic + diastolic. */
 export default function TrendChart({ indicatorId, days, baseline, wobble, height = 150 }: Props) {
+  const isBp = indicatorId === 'bp';
   const data = useMemo(
     () =>
       days.map((d) => {
         const v = seriesValue(indicatorId, d.values);
         const lo = baseline != null && wobble != null ? baseline - wobble : null;
         const hi = baseline != null && wobble != null ? baseline + wobble : null;
-        return { day: `D${d.day}`, v, lo, diff: lo != null && hi != null ? hi - lo : null };
+        return {
+          day: `D${d.day}`,
+          v,
+          dia: isBp ? d.values['bp_dia'] ?? null : null,
+          lo,
+          diff: lo != null && hi != null ? hi - lo : null,
+        };
       }),
-    [days, indicatorId, baseline, wobble],
+    [days, indicatorId, baseline, wobble, isBp],
   );
   return (
     <div style={{ width: '100%', height }}>
@@ -38,7 +45,10 @@ export default function TrendChart({ indicatorId, days, baseline, wobble, height
           />
           <Area type="monotone" dataKey="lo" stackId="band" stroke="none" fill="transparent" />
           <Area type="monotone" dataKey="diff" stackId="band" stroke="none" fill="#4f46e5" fillOpacity={0.12} name="Your normal" />
-          <Line type="monotone" dataKey="v" stroke="#4f46e5" strokeWidth={2.5} dot={{ r: 2 }} name="Reading" connectNulls />
+          <Line type="monotone" dataKey="v" stroke="#4f46e5" strokeWidth={2.5} dot={{ r: 2 }} name={isBp ? 'Systolic' : 'Reading'} connectNulls />
+          {isBp && (
+            <Line type="monotone" dataKey="dia" stroke="#f59e0b" strokeWidth={2} dot={false} name="Diastolic" connectNulls />
+          )}
         </ComposedChart>
       </ResponsiveContainer>
     </div>
