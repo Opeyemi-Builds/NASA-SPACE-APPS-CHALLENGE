@@ -55,7 +55,12 @@ export default function ZonePanel({ zone, evaluation, days, baseline, wobble, st
                 <div><b>What this means:</b> {ind.plain}</div>
                 <div><b>What to do now:</b> {ind.watchAction}</div>
                 <div><b>Who to tell:</b> {ind.who}</div>
-                <div className="text-xs text-slate-500">Hazards: {ind.hazards.join(' · ')} — Source: {ind.source}</div>
+                <div className="mt-1.5 flex flex-wrap gap-1">
+                  {ind.hazards.map((h) => (
+                    <span key={h} className="hazard-tag">{h}</span>
+                  ))}
+                </div>
+                <div className="mt-1 text-xs text-slate-500">Source: {ind.source}</div>
               </div>
             </div>
           );
