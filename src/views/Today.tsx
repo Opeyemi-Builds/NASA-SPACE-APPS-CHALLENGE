@@ -8,7 +8,7 @@ import ZonePanel from '../components/ZonePanel';
 import { computeBaseline } from '../lib/baseline';
 
 export default function Today() {
-  const { days, evals, day, setDay, setTab, zone, setZone, startWeightKg } = useHealth();
+  const { days, evals, day, setDay, setTab, zone, setZone, startWeightKg, resetDemo } = useHealth();
   const ev = evalForDay(evals, day);
   const msg = STATUS_MESSAGES[ev.overall];
   const { baseline, wobble } = useMemo(() => computeBaseline([...days].sort((a, b) => a.day - b.day).slice(0, 7)), [days]);
@@ -60,6 +60,9 @@ export default function Today() {
 
       <button onClick={() => setTab('checkin')} className="btn-primary mt-4 w-full">
         Start daily check-in
+      </button>
+      <button onClick={resetDemo} className="mt-2 w-full rounded-2xl border border-slate-300 bg-white py-2.5 text-sm font-bold text-slate-500">
+        Reset demo data
       </button>
 
       {zone && (
