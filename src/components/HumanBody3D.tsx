@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -59,7 +59,8 @@ function Model({
   selected,
   onSelect,
   markers,
-}: Omit<Props, 'height'>) {
+  spinEnabled,
+}: Omit<Props, 'height'> & { spinEnabled: boolean }) {
   const spin = useRef<THREE.Group>(null);
   const heart = useRef<THREE.Mesh>(null);
   const brain = useRef<THREE.Mesh>(null);
@@ -77,7 +78,7 @@ function Model({
       const pulse = alert === 'Normal' ? 1 : 1 + Math.sin(t.current * 6) * 0.08;
       brain.current.scale.setScalar(pulse);
     }
-    if (spin.current) spin.current.rotation.y += dt * 0.18;
+    if (spin.current && spinEnabled) spin.current.rotation.y += dt * 0.18;
   });
 
   const sel = (z: Zone) => ({
@@ -264,6 +265,9 @@ export function buildMarkers(evaluation: DayEvaluation): BodyMarker[] {
 }
 
 export default function HumanBody3D({ zoneStatus, selected, onSelect, markers, height = 460 }: Props) {
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const [spinOn, setSpinOn] = useState(true);
+  const spinEnabled = spinOn && !prefersReduced;
   return (
     <div style={{ width: '100%', height }}>
       <style>{`@keyframes hbBlink { 50% { box-shadow: 0 0 0 6px rgb(220 38 38 / 0.15), 0 0 26px rgb(220 38 38 / 0.55); } }`}</style>
@@ -272,7 +276,7 @@ export default function HumanBody3D({ zoneStatus, selected, onSelect, markers, h
         <directionalLight position={[3, 5, 4]} intensity={1.4} />
         <directionalLight position={[-3, 2, -2]} intensity={0.4} />
         <Suspense fallback={null}>
-          <Model zoneStatus={zoneStatus} selected={selected} onSelect={onSelect} markers={markers} />
+          <Model zoneStatus={zoneStatus} selected={selected} onSelect={onSelect} markers={markers} spinEnabled={spinEnabled} />
         </Suspense>
         <OrbitControls
           enablePan={false}
@@ -280,14 +284,23 @@ export default function HumanBody3D({ zoneStatus, selected, onSelect, markers, h
           minDistance={3}
           maxDistance={9}
           maxPolarAngle={Math.PI / 1.55}
-          autoRotate
+          autoRotate={spinEnabled}
           autoRotateSpeed={0.9}
           target={[0, 0.9, 0]}
         />
       </Canvas>
-      <p style={{ textAlign: 'center', fontSize: 12, color: '#64748b', marginTop: 2 }}>
-        Drag to rotate · scroll to zoom · click a body part
-      </p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 2 }}>
+        <p style={{ textAlign: 'center', fontSize: 12, color: '#64748b', margin: 0 }}>
+          Drag to rotate · scroll to zoom · click a body part
+        </p>
+        <button
+          onClick={() => setSpinOn((s) => !s)}
+          aria-pressed={spinEnabled}
+          style={{ fontSize: 12, fontWeight: 700, color: '#4f46e5', background: '#eef2ff', border: '1px solid #c7d2fe', borderRadius: 999, padding: '2px 10px', cursor: 'pointer' }}
+        >
+          {spinOn ? 'Pause spin' : 'Resume spin'}
+        </button>
+      </div>
     </div>
   );
 }
