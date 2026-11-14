@@ -130,7 +130,7 @@ export function runAllTests(): { cases: TestCase[]; passed: number; total: numbe
     });
   }
 
-  // Demo story beats
+  // Mission timeline checks
   {
     const days = generateDemoDays();
     const base = computeBaseline(days.slice(0, 7));
@@ -141,18 +141,18 @@ export function runAllTests(): { cases: TestCase[]; passed: number; total: numbe
     const e7 = evalDay(7);
     const allGreen = e7.overall === 'Normal' && Object.values(e7.results).every((r) => r.status === 'Normal');
     cases.push({
-      name: 'Demo Day 7', input: 'first week complete', expected: 'All green',
+      name: 'Day 7 baseline', input: 'first week complete', expected: 'All green',
       got: allGreen ? 'All green' : `Overall ${e7.overall}`, pass: allGreen,
     });
     const e10 = evalDay(10);
     cases.push({
-      name: 'Demo Day 10', input: '2nd short night', expected: 'Sleep Watch',
+      name: 'Day 10 sleep drift', input: '2nd short night', expected: 'Sleep Watch',
       got: `Sleep ${e10.results['sleep'].status} / overall ${e10.overall}`,
       pass: e10.results['sleep'].status === 'Watch',
     });
     const e12 = evalDay(12);
     cases.push({
-      name: 'Demo Day 12', input: 'signs add up', expected: 'Overall Alert',
+      name: 'Day 12 pattern rule', input: 'signs add up', expected: 'Overall Alert',
       got: `Overall ${e12.overall}${e12.patternTriggered ? ' (pattern rule)' : ''}`,
       pass: e12.overall === 'Alert',
     });

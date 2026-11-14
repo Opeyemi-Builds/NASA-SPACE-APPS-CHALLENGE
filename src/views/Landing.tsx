@@ -76,15 +76,15 @@ export default function Landing() {
                 Enter App — Day 12 →
               </button>
               <div className="flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/5 px-4 py-2.5 backdrop-blur-md">
-                <span className="text-xs font-semibold text-slate-300">Demo crew status</span>
+                <span className="text-xs font-semibold text-slate-300">Crew status</span>
                 <StatusBadge status={e12.overall} size="sm" />
               </div>
             </div>
 
-            {/* demo-day quick entry chips */}
+            {/* mission timeline quick entry */}
             <div className="mt-6">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
-                Replay the 3-minute demo story
+                Mission timeline — jump to a key day
               </p>
               <div className="mt-2 flex gap-2 overflow-x-auto pb-2 [-webkit-overflow-scrolling:touch] sm:flex-wrap">
                 {DEMO_DAYS.map(([d, t, day]) => (
@@ -127,7 +127,7 @@ export default function Landing() {
           >
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-extrabold text-slate-900">Health Monitoring</h2>
-              <span className="tag">Live demo</span>
+              <span className="tag">Live</span>
             </div>
             <p className="mt-1 text-xs text-slate-500">Heart-rate overview · Day 12</p>
             {/* mini bar visual */}
@@ -172,7 +172,7 @@ export default function Landing() {
                 <h2 className="text-lg font-extrabold text-white">Body status — live 3D</h2>
                 <p className="text-xs text-slate-400">Day 12: drag to rotate, click a glowing region for detail</p>
               </div>
-              <span className="tag">Live demo</span>
+              <span className="tag">Live</span>
             </div>
             <HumanBody3D
               zoneStatus={e12.zoneStatus}
@@ -220,7 +220,7 @@ export default function Landing() {
               </div>
             </div>
             <div className="card card-pad">
-              <h3 className="text-sm font-extrabold text-slate-900">Demo story</h3>
+              <h3 className="text-sm font-extrabold text-slate-900">Mission timeline</h3>
               <div className="mt-2 space-y-1.5 text-[13px]">
                 {DEMO_DAYS.map(([d, t, day]) => (
                   <button
@@ -265,7 +265,7 @@ export default function Landing() {
               ['600 mSv career limit', 'NASA caps an astronaut’s career radiation dose at 600 mSv, with a 250 mSv limit for a single solar storm. The app tracks the running total.'],
               ['20-minute delay', 'Radio takes about 1–2 seconds to reach the Moon and up to ~20 minutes one-way to Mars. The crew must act first — the app gives the steps.'],
               ['1–1.5% bone loss / month', 'Without gravity and daily exercise, bones lose roughly 1–1.5% density per month on 4–6 month missions. Exercise time is a tracked indicator.'],
-              ['7+ hours of sleep', 'Adults need at least 7 hours (AASM/CDC). The demo shows what four short nights do to sleep, mood, heart rate and the overall status.'],
+              ['7+ hours of sleep', 'Adults need at least 7 hours (AASM/CDC). Four short nights cascade into sleep, mood, heart rate and the overall status.'],
             ].map(([h, p], i) => (
               <motion.div
                 key={h}
@@ -281,7 +281,7 @@ export default function Landing() {
         </section>
 
         <footer className="pb-10 pt-6 text-center text-[13px] text-slate-400">
-          Astro Health Companion · NASA Space Apps 2026 Challenge 4 · Demonstration data and example ranges. Not medical advice.
+          Astro Health Companion · NASA Space Apps 2026 Challenge 4 · Sample mission data for evaluation. Not medical advice.
           <br />Sources: NASA HRP hazards and risks, AHA, CDC/ADA, Mayo Clinic, NASA-STD-3001 — full links in the Learn tab.
         </footer>
       </div>

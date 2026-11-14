@@ -302,45 +302,79 @@ function Astronaut({ zoneStatus, selected, onSelect, markers }: Omit<Props, 'hei
         <meshBasicMaterial color="#22d3ee" transparent opacity={0.4} side={THREE.DoubleSide} depthWrite={false} />
       </mesh>
 
-      {/* danger labels */}
+      {/* pointer callouts: glowing dot on the anatomy + thin pointer line + small offset label */}
       {(markers ?? [])
         .filter((m) => m.status !== 'Normal')
-        .map((m) => (
-          <Html key={m.zone} position={ANCHOR[m.zone]} center distanceFactor={4} zIndexRange={[30, 0]}>
-            <button
-              onClick={() => onSelect(m.zone)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                background: 'rgba(7,13,34,0.92)',
-                border: `2px solid ${ZONE_COLOR[m.status]}`,
-                borderRadius: 12,
-                padding: '6px 10px',
-                fontSize: 12,
-                fontWeight: 800,
-                color: '#f1f5f9',
-                whiteSpace: 'nowrap',
-                boxShadow: `0 6px 24px rgb(0 0 0 / 0.5), 0 0 18px ${ZONE_COLOR[m.status]}55`,
-                cursor: 'pointer',
-              }}
-            >
-              <span
+        .map((m) => {
+          const color = ZONE_COLOR[m.status];
+          return (
+            <Html key={m.zone} position={ANCHOR[m.zone]} center distanceFactor={4} zIndexRange={[30, 0]}>
+              <button
+                onClick={() => onSelect(m.zone)}
+                aria-label={`${m.title}: ${m.sub}`}
                 style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 999,
-                  background: ZONE_COLOR[m.status],
-                  display: 'inline-block',
+                  position: 'relative',
+                  width: 120,
+                  height: 64,
+                  background: 'transparent',
+                  border: 0,
+                  padding: 0,
+                  cursor: 'pointer',
                 }}
-              />
-              <span>
-                {m.title}
-                <span style={{ display: 'block', fontWeight: 600, color: '#94a3b8', fontSize: 11 }}>{m.sub}</span>
-              </span>
-            </button>
-          </Html>
-        ))}
+              >
+                {/* anchor dot on the body */}
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 6,
+                    top: '50%',
+                    width: 12,
+                    height: 12,
+                    borderRadius: 999,
+                    background: color,
+                    boxShadow: `0 0 0 4px ${color}33, 0 0 16px ${color}`,
+                    transform: 'translateY(-50%)',
+                  }}
+                />
+                {/* pointer line */}
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 18,
+                    top: '50%',
+                    width: 30,
+                    height: 2,
+                    background: `linear-gradient(90deg, ${color}, ${color}66)`,
+                    transform: 'translateY(-50%)',
+                  }}
+                />
+                {/* compact label beside the line */}
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 48,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'rgba(7,13,34,0.88)',
+                    border: `1px solid ${color}88`,
+                    borderRadius: 8,
+                    padding: '4px 8px',
+                    fontSize: 11,
+                    fontWeight: 800,
+                    color: '#f1f5f9',
+                    whiteSpace: 'nowrap',
+                    boxShadow: `0 4px 16px rgb(0 0 0 / 0.5), 0 0 12px ${color}44`,
+                  }}
+                >
+                  {ZONE_SHORT[m.zone]}
+                  <span style={{ display: 'block', fontWeight: 600, color: color, fontSize: 10 }}>
+                    {m.status === 'Urgent' ? 'Urgent' : m.status === 'Alert' ? 'Alert' : 'Watch'}
+                  </span>
+                </span>
+              </button>
+            </Html>
+          );
+        })}
     </group>
   );
 }

@@ -1,9 +1,9 @@
 import type { DayReading } from '../types';
 
 /**
- * Seeded 14-day demo generator (handover §7.5).
- * Fixed seed → identical demo every run. Days 1–7 are normal (set baseline).
- * Story: lost sleep → rising heart rate, lower mood, less exercise.
+ * Seeded 14-day mission dataset (handover §7.5).
+ * Fixed seed → identical data every run. Days 1–7 are normal (set baseline).
+ * Timeline: lost sleep → rising heart rate, lower mood, less exercise.
  *   Day 7: all green · Day 10: sleep + brain zone Watch · Day 11: sleep Alert
  *   Day 12: mood + HR + exercise Watch → pattern rule → overall Alert.
  */
@@ -48,11 +48,11 @@ const USUALS: Record<string, Usual> = {
 const round1 = (x: number) => Math.round(x * 10) / 10;
 
 export function generateDemoDays(seed = 20261014): DayReading[] {
-  void seed; // story values below are scripted exactly (not drawn) so the demo
+  void seed; // timeline values below are scripted exactly (not drawn) so the
   // beats land identically on every run: Day 7 all green, Day 10 sleep Watch,
   // Day 11 sleep Alert, Day 12 overall Alert via the pattern rule.
   const days: DayReading[] = [];
-  let radiationTotal = 120; // career mSv already accumulated before the demo
+  let radiationTotal = 120; // career mSv already accumulated before day 1
   const hrScript: Record<number, number> = { 8: 66, 9: 65, 10: 67, 11: 70, 12: 73, 13: 76, 14: 78 };
   for (let day = 1; day <= 14; day++) {
     const shortNights = day >= 9 && day <= 12; // main story: lost sleep

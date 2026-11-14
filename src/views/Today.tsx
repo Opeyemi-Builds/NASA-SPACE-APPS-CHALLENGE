@@ -41,11 +41,10 @@ export default function Today() {
 
       <div className="card mt-3 px-4 py-3">
         <label className="text-sm font-bold text-slate-800">
-          Demo day slider (Day 1 to Day 14)
-          <span className="ml-2 rounded bg-yellow-100 px-2 py-0.5 text-xs font-bold text-yellow-800">demo control</span>
+          Mission day (Day 1 to Day 14)
         </label>
         <div className="flex items-center gap-3">
-          <input type="range" min={1} max={14} value={day} onChange={(e) => setDay(Number(e.target.value))} className="w-full" aria-label="Demo day" />
+          <input type="range" min={1} max={14} value={day} onChange={(e) => setDay(Number(e.target.value))} className="w-full" aria-label="Mission day" />
           <b className="w-14 text-center text-lg text-slate-900">{day}/14</b>
         </div>
         <p className="text-xs text-slate-500">Day 7: all green · Day 10: sleep Watch · Day 11: sleep Alert · Day 12: overall Alert</p>
@@ -65,7 +64,7 @@ export default function Today() {
         Start daily check-in
       </button>
       <button onClick={resetDemo} className="mt-2 w-full rounded-2xl border border-slate-300 bg-white py-2.5 text-sm font-bold text-slate-500">
-        Reset demo data
+        Reset mission data
       </button>
 
       {zone && (

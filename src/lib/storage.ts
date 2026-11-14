@@ -2,7 +2,7 @@ import type { DayReading } from '../types';
 
 const KEY = 'astro-health-companion/v1/days';
 
-/** Persist check-in edits on device so a refresh never loses the demo (offline-first). */
+/** Persist check-in edits on device so a refresh never loses mission data (offline-first). */
 export function loadDays(): DayReading[] | null {
   try {
     const raw = localStorage.getItem(KEY);
@@ -19,7 +19,7 @@ export function saveDays(days: DayReading[]): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(days));
   } catch {
-    /* storage full or unavailable — demo still works in memory */
+    /* storage full or unavailable — app still works in memory */
   }
 }
 
