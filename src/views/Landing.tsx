@@ -12,10 +12,11 @@ const VITALS = [
 ];
 
 export default function Landing() {
-  const { setRoute, setDay, evals } = useHealth();
+  const { setRoute, setDay, setTab, evals } = useHealth();
   const e12 = evalForDay(evals, 12);
   const enter = (day: number) => {
     setDay(day);
+    setTab('today');
     setRoute('app');
     window.scrollTo(0, 0);
   };
