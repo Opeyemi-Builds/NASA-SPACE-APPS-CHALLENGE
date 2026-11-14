@@ -17,6 +17,13 @@ export default function Trends() {
     <div className="mx-auto max-w-3xl px-4 pb-28">
       <h2 className="mt-4 text-2xl font-extrabold text-slate-900">Trends — Day {day}</h2>
       <p className="text-sm text-slate-500">Every indicator, 14 days, shaded with your own normal band. Hazard tags included.</p>
+      <div className="card mt-3 px-4 py-3">
+        <label className="text-sm font-bold text-slate-800">
+          Compare day
+          <span className="ml-2 rounded bg-indigo-50 px-2 py-0.5 text-xs font-bold text-indigo-700">status shown for Day {day}</span>
+        </label>
+        <p className="text-xs text-slate-500">Statuses update as you move the day slider in Today. Return there to replay the story.</p>
+      </div>
       <div className="mt-3 space-y-3">
         {INDICATORS.map((ind) => {
           const ck = chartKey(ind.id);
