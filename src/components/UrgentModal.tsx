@@ -34,7 +34,12 @@ export default function UrgentModal({ reason, onClose }: { reason: string | null
           <summary className="cursor-pointer font-bold text-slate-800">All urgent triggers</summary>
           <ul className="mt-2 list-disc pl-5">{TRIGGERS.map((t) => <li key={t}>{t}</li>)}</ul>
         </details>
-        <button onClick={onClose} className="btn-primary mt-5 w-full">
+        <button
+          onClick={onClose}
+          className="btn-primary mt-5 w-full"
+          autoFocus
+          onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}
+        >
           Understood — show me what to do
         </button>
       </div>
