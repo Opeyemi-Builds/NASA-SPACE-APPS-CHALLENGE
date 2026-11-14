@@ -63,7 +63,7 @@ function Shell() {
         URGENT
       </button>
 
-      <nav className="fixed bottom-0 z-40 flex w-full border-t border-slate-200 bg-white/95">
+      <nav className="fixed bottom-0 z-40 flex w-full border-t border-slate-200 bg-white/95" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="mx-auto flex w-full max-w-3xl">
           {TABS.map((t) => (
             <button
