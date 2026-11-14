@@ -32,7 +32,7 @@ export default function Learn() {
       <div className="mt-2 space-y-3">
         {INDICATORS.map((i) => (
           <details key={i.id} className="card card-pad">
-            <summary className="cursor-pointer font-bold text-slate-900">{i.name} <span className="text-xs font-normal text-slate-500">({i.unit} · {i.priority})</span></summary>
+            <summary className="min-h-[44px] cursor-pointer font-bold text-slate-900">{i.name} <span className="text-xs font-normal text-slate-500">({i.unit} · {i.priority})</span></summary>
             <div className="mt-2 space-y-1.5 text-sm text-slate-600">
               <p><b>What it is:</b> {i.plain}</p>
               <p><b>How to measure:</b> {i.how}</p>

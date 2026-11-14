@@ -51,13 +51,13 @@ export default function Today() {
         <p className="text-xs text-slate-500">Day 7: all green · Day 10: sleep Watch · Day 11: sleep Alert · Day 12: overall Alert</p>
       </div>
 
-      <div className="card mt-3 p-2">
+      <div className="mt-3">
         <HumanBody3D
           zoneStatus={ev.zoneStatus}
           selected={zone}
           onSelect={setZone}
           markers={buildMarkers(ev)}
-          height={470}
+          height={typeof window !== 'undefined' && window.innerWidth < 640 ? 340 : 470}
         />
       </div>
 

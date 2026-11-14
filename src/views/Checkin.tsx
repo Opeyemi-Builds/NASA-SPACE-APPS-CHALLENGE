@@ -92,7 +92,7 @@ export default function Checkin() {
                     <button
                       key={n}
                       onClick={() => setDraft((p) => ({ ...p, [f.key]: n }))}
-                      className={`h-12 flex-1 rounded-xl border font-extrabold ${Number(prefill(f.key, false)) === n ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : 'border-slate-300 bg-white text-slate-600'}`}
+                      className={`min-h-[48px] flex-1 rounded-xl border font-extrabold ${Number(prefill(f.key, false)) === n ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : 'border-slate-300 bg-white text-slate-600'}`}
                     >
                       {n}
                     </button>

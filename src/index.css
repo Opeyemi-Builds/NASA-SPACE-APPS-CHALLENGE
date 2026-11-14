@@ -3,7 +3,8 @@
 @theme {
   --color-clinical: #edf0f7;
   --color-accent: #4f46e5;
-  --font-display: "Segoe UI", system-ui, -apple-system, Roboto, Inter, Arial, sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-head: "Space Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -12,8 +13,15 @@ body {
   margin: 0;
   font-family: var(--font-display);
   color: #0f172a;
-  background: #edf0f7;
+  background: #04060f;
   -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  letter-spacing: -0.01em;
 }
 
 /* ---------- semantic clinical kit (inspo: light health dashboard) ---------- */
@@ -24,6 +32,13 @@ body {
   box-shadow: 0 6px 24px rgb(15 23 42 / 0.06);
 }
 .card-pad { padding: 18px; }
+@media (max-width: 640px) {
+  .card-pad { padding: 16px; }
+  /* long tables / test grid scroll sideways instead of squeezing */
+  .card.overflow-hidden { overflow-x: auto; }
+  table.grid-table { min-width: 560px; font-size: 13px; }
+  table.grid-table td, table.grid-table th { padding: 6px; }
+}
 .eyebrow {
   display: inline-block;
   background: #eef2ff;
@@ -67,7 +82,8 @@ body {
   font-size: 17px;
   margin: 6px 0;
 }
-input[type="range"] { accent-color: #4f46e5; }
+input[type="range"] { accent-color: #4f46e5; min-height: 44px; }
+input[type="range"]::-webkit-slider-thumb { cursor: pointer; }
 
 :focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; }
 .tag {

@@ -30,7 +30,7 @@ function Shell() {
 
   if (route === 'landing') {
     return (
-      <div className="min-h-screen bg-[#edf0f7]">
+      <div className="min-h-screen bg-[#04060f]">
         <Banner />
         <Landing />
       </div>
@@ -70,7 +70,7 @@ function Shell() {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={cn(
-                'flex-1 border-t-[3px] px-1.5 py-3 text-[13px] font-bold',
+                'flex-1 border-t-[3px] px-1.5 py-3.5 text-[13px] font-bold',
                 tab === t.id ? 'border-indigo-600 text-slate-900' : 'border-transparent text-slate-400',
               )}
             >
