@@ -34,6 +34,9 @@ export default function Today() {
 
       <div className="card mt-3 px-4 py-3 text-sm text-slate-700">
         <b>Next check-in due:</b> {nextDue} {ev.overall === 'Normal' ? 'in 2 hours' : '— re-check now'}
+        {watchList.length > 0 && (
+          <span className="ml-2 text-xs text-slate-500">({watchList.length} indicator{watchList.length > 1 ? 's' : ''} need attention)</span>
+        )}
       </div>
 
       <div className="card mt-3 px-4 py-3">
