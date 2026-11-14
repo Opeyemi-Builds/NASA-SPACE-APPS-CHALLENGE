@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { DayEvaluation, DayReading, Zone } from './types';
 import { generateDemoDays } from './data/demo';
 import { evaluateAll } from './lib/evaluateAll';
-import { loadDays, saveDays } from './lib/storage';
+import { loadDays, resetDays, saveDays } from './lib/storage';
 
 export type Tab = 'today' | 'checkin' | 'trends' | 'learn' | 'tests';
 
@@ -11,6 +11,7 @@ interface HealthStore {
   evals: DayEvaluation[];
   startWeightKg: number;
   upsertToday: (day: number, values: Record<string, number>, flags: DayReading['flags']) => void;
+  resetDemo: () => void;
   day: number;
   setDay: (d: number) => void;
   tab: Tab;
@@ -49,10 +50,17 @@ export function HealthProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const resetDemo = () => {
+    resetDays();
+    setDays(generateDemoDays());
+    setDay(12);
+    setZone(null);
+  };
+
   return (
     <Ctx.Provider
       value={{
-        days, evals, startWeightKg, upsertToday,
+        days, evals, startWeightKg, upsertToday, resetDemo,
         day, setDay, tab, setTab, zone, setZone,
         urgentOpen, setUrgentOpen, route, setRoute,
       }}
