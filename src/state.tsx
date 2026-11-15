@@ -32,7 +32,7 @@ export function HealthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     saveDays(days);
   }, [days]);
-  const [day, setDay] = useState(14);
+  const [day, setDay] = useState(12);
   const [tab, setTab] = useState<Tab>('today');
   const [zone, setZone] = useState<Zone | null>(null);
   const [urgentOpen, setUrgentOpen] = useState(false);
