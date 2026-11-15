@@ -1,0 +1,3 @@
+# Extra question template 29
+
+How-to card, big number input, yes-no card, big Next button.
