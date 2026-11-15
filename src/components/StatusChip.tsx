@@ -27,3 +27,5 @@ export default function StatusChip({ status, size = 'md' }: { status: Status; si
     </span>
   );
 }
+
+// Guide S2: StatusChip colour+icon+word, never colour alone
