@@ -108,3 +108,5 @@ export default function BodyFigure({ zoneStatus, onSelect }: Props) {
     </svg>
   );
 }
+
+// Guide S3b: 7 zones each with own id and onClick
