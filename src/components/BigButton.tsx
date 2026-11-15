@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import { cn } from '../lib/cn';
 
-// Guide Step 2: full-width button, min 48px tall, blue by default.
+// Designed buttons: indigo→violet gradient primary, min 48px targets.
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger';
 }
@@ -11,5 +11,3 @@ export default function BigButton({ variant = 'primary', className = '', ...rest
     variant === 'primary' ? 'btn-primary' : variant === 'danger' ? 'btn-danger' : 'btn-secondary';
   return <button className={cn(cls, 'w-full', className)} {...rest} />;
 }
-
-// Guide S2: 48px minimum tap target

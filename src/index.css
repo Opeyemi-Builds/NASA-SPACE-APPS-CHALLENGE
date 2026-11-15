@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
-/* Guide §3: calm phone-first theme. */
 @theme {
-  --color-paper: #F4F6FB;
-  --color-ink: #14213D;
-  --color-primary: #2F5BEA;
-  --color-cardline: #D9DFEC;
+  --color-clinical: #edf0f7;
+  --color-accent: #4f46e5;
   --font-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-head: "Space Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
@@ -15,8 +12,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: var(--font-display);
-  color: #14213D;
-  background: #F4F6FB;
+  color: #0f172a;
+  background: #04060f;
   -webkit-tap-highlight-color: transparent;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -27,19 +24,30 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 
-/* White rounded card on the light background. */
+/* Designed clinical kit: white cards over the deep-space backdrop. */
 .card {
   background: #ffffff;
-  border: 1px solid #D9DFEC;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgb(20 33 61 / 0.05);
+  border: 1px solid #e3e8f2;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgb(15 23 42 / 0.06);
 }
 .card-pad { padding: 18px; }
 @media (max-width: 640px) {
   .card-pad { padding: 16px; }
+  table.grid-table { min-width: 560px; font-size: 13px; }
+  table.grid-table td, table.grid-table th { padding: 6px; }
 }
-
-/* Big tappable buttons (min 48px, guide §3). */
+.eyebrow {
+  display: inline-block;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #4338ca;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
 .btn-primary {
   border: 0;
   border-radius: 14px;
@@ -48,8 +56,8 @@ h1, h2, h3 {
   font-weight: 800;
   font-size: 17px;
   color: #fff;
-  background: #2F5BEA;
-  box-shadow: 0 8px 22px rgb(47 91 234 / 0.28);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 10px 28px rgb(79 70 229 / 0.35);
   cursor: pointer;
 }
 .btn-primary:hover { filter: brightness(1.06); }
@@ -59,9 +67,9 @@ h1, h2, h3 {
   min-height: 48px;
   font-weight: 700;
   font-size: 16px;
-  color: #14213D;
+  color: #1e1b4b;
   background: #fff;
-  border: 1px solid #D9DFEC;
+  border: 1px solid #c7d2fe;
   cursor: pointer;
 }
 .btn-danger {
@@ -72,42 +80,56 @@ h1, h2, h3 {
   font-weight: 800;
   font-size: 17px;
   color: #fff;
-  background: #A32218;
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  box-shadow: 0 10px 28px rgb(220 38 38 / 0.35);
   cursor: pointer;
 }
 .field-input {
   width: 100%;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid #D9DFEC;
+  border: 1px solid #cbd5e1;
   background: #fff;
-  color: #14213D;
+  color: #0f172a;
   font-size: 20px;
   font-weight: 800;
   margin: 6px 0;
 }
-input[type="range"] { accent-color: #2F5BEA; min-height: 48px; }
+input[type="range"] { accent-color: #4f46e5; min-height: 48px; }
+input[type="range"]::-webkit-slider-thumb { cursor: pointer; }
 
-:focus-visible { outline: 3px solid #2F5BEA; outline-offset: 2px; }
+:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; }
 .tag {
   font-size: 12px;
-  border: 1px solid #D9DFEC;
-  background: #fff;
+  border: 1px solid #e0e7ff;
+  background: #eef2ff;
   border-radius: 999px;
   padding: 6px 12px;
-  color: #14213D;
+  color: #4338ca;
   font-weight: 600;
 }
 .hazard-tag {
   border-radius: 999px;
-  background: #F4F6FB;
-  border: 1px solid #D9DFEC;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   padding: 2px 8px;
   font-size: 11px;
   color: #475569;
   font-weight: 600;
 }
+table.grid-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.grid-table td, table.grid-table th { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
+
+@keyframes floaty { 50% { transform: translateY(-9px); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes blink-red {
+  50% { box-shadow: 0 0 0 6px rgb(239 68 68 / 0.15), 0 0 34px rgb(239 68 68 / 0.65); }
+}
+.anim-floaty { animation: floaty 4s ease-in-out infinite; }
+.anim-spin-slower { animation: spin-slow 40s linear infinite; }
+.anim-spin-slow { animation: spin-slow 26s linear infinite; }
+.anim-blink { animation: blink-red 1.4s infinite; }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: #D9DFEC; border-radius: 8px; }
+::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
