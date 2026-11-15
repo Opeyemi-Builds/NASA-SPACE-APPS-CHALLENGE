@@ -5,3 +5,5 @@ import { cn } from '../lib/cn';
 export default function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <div className={cn('card card-pad', className)}>{children}</div>;
 }
+
+// Guide S2: white rounded box used on every screen
