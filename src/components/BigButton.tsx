@@ -11,3 +11,5 @@ export default function BigButton({ variant = 'primary', className = '', ...rest
     variant === 'primary' ? 'btn-primary' : variant === 'danger' ? 'btn-danger' : 'btn-secondary';
   return <button className={cn(cls, 'w-full', className)} {...rest} />;
 }
+
+// Guide S2: 48px minimum tap target
